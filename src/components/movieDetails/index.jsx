@@ -44,6 +44,20 @@ const MovieDetails = ( props) => {
           </li>
         ))}
       </Paper>
+
+
+      <Paper component="ul" sx={styles.chipSet}>
+        <li>
+          <Chip label="Countrys" sx={styles.chipLabel} color="primary" />
+        </li>
+        {movie.production_countries.map((c) => (    //constructing a movie's list of countrys at runtime
+          <li key={c.name}>
+            <Chip label={c.name}  />
+          </li>
+        ))}
+      </Paper>
+
+
       <Paper component="ul" sx={styles.chipSet}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
