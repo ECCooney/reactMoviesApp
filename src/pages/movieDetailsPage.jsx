@@ -5,6 +5,7 @@ import MovieDetails from "../components/movieDetails/";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import { getMovie, getMovieImages } from "../api/tmdb-api";
 
 const styles = {
   imageListRoot: {
@@ -19,29 +20,16 @@ const MoviePage = (props) => {
   const [movie, setMovie] = useState(null);
   const [images, setImages] = useState([]);
 
-  useEffect(() => { //uses the API's movie endpoint to get the full details on the film.
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}`
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((movie) => {
-        // console.log(movie)
-        setMovie(movie);
-      });
+  useEffect(() => {
+    getMovie(id).then((movie) => {
+      setMovie(movie);
+    });
   }, [id]);
 
-  useEffect(() => { //gets the set of images for the same movie.
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${import.meta.env.VITE_TMDB_KEY}`
-    )
-      .then((res) => res.json())
-      .then((json) => json.posters)
-      .then((images) => {
-        // console,log(images)
-        setImages(images);
-      });
+  useEffect(() => {
+    getMovieImages(id).then((images) => {
+      setImages(images);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
