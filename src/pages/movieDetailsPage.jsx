@@ -32,7 +32,7 @@ const MoviePage = (props) => {
       });
   }, [id]);
 
-  useEffect(() => {
+  useEffect(() => { //gets the set of images for the same movie.
     fetch(
       `https://api.themoviedb.org/3/movie/${id}/images?api_key=${import.meta.env.VITE_TMDB_KEY}`
     )
