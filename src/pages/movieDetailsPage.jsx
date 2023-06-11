@@ -13,7 +13,7 @@ const MovieDetailsPage = (props) => {
       {movie ? (
         <>
           <PageTemplate movie={movie}>
-            <MovieDetails movie={movie} /> 
+            <MovieDetails movie={movie} />   {/*the children prop of TemplateMoviePage is bound to this*/}
           </PageTemplate>
         </>
       ) : (
