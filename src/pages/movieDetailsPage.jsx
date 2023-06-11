@@ -2,25 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
 import PageTemplate from "../components/templateMoviePage";
-import { getMovie } from "../api/tmdb-api";
-
-const styles = {
-  imageListRoot: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-  },
-};
+import useMovie from "../hooks/useMovie";
 
 const MovieDetailsPage = (props) => {
   const { id } = useParams(); //useParams hook (from react-router) allows the component to extract the movie id from the browser's parameterized URL address
-  const [movie, setMovie] = useState(null);
-
-  useEffect(() => {
-    getMovie(id).then((movie) => {
-      setMovie(movie);
-    });
-  }, [id]);
+  const [movie] = useMovie(id); //custom hook
 
   return (
     <>
