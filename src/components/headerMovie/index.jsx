@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import HomeIcon from "@mui/icons-material/Home";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from "@mui/material/Avatar";
-import FavouriteMoviesPage from "../../pages/favouriteMoviesPage";
 
 const styles = {
     root: {  
