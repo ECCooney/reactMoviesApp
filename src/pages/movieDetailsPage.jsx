@@ -2,11 +2,27 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
 import PageTemplate from "../components/templateMoviePage";
-import useMovie from "../hooks/useMovie";
+// import useMovie from "../hooks/useMovie";
 
-const MovieDetailsPage = (props) => {
-  const { id } = useParams(); //useParams hook (from react-router) allows the component to extract the movie id from the browser's parameterized URL address
-  const [movie] = useMovie(id); //custom hook
+import { getMovie } from '../api/tmdb-api'
+import { useQuery } from "react-query";
+import Spinner from '../components/spinner'
+
+const MovieDetailsPage = () => {
+  const { id } = useParams();
+
+  const { data: movie, error, isLoading, isError } = useQuery(
+    ["movie", { id: id }],
+    getMovie
+  );
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
 
   return (
     <>
