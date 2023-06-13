@@ -18,11 +18,12 @@ const styles = {
   },
 };
 
-function MovieListPageTemplate({ movies, title, selectFavourite }) { 
+function MovieListPageTemplate({ movies, title, action }) { 
    //the above is shorthand for function MovieListPageTemplate( props ) {
    // const movies = props.movies
    // const title = props.title
-  //  const selectFavourite = props.selectFavourite
+  //  const action = props.action (where action refers to the add favourite render prop)
+
   const [titleFilter, setTitleFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -49,10 +50,7 @@ function MovieListPageTemplate({ movies, title, selectFavourite }) {
           <Header title={title} />
         </Grid>
         <Grid item container spacing={5}>
-          <MovieList
-            movies={displayedMovies}
-            selectFavourite={selectFavourite}
-          />
+           <MovieList action={action} movies={displayedMovies} />
         </Grid>
       </Grid>
       <Fab
