@@ -21,7 +21,10 @@ const MoviesContextProvider = (props) => {
       updatedMustWatch.push(movie.id);
     }
     setMustWatch(updatedMustWatch);
+    console.log (updatedMustWatch);
   };
+
+  
 
   // We will use this function in a later section
   const removeFromFavourites = (movie) => {
