@@ -65,6 +65,13 @@ export default function TvShowCard({ tvShow}) {      // Destructure props
           </Grid>
         </Grid>
       </CardContent>
+      <CardActions disableSpacing>
+        <Link to={`/tvShows/${tvShow.id}`}>
+          <Button variant="outlined" size="medium" color="primary">
+            More Info ...
+          </Button>
+        </Link>
+      </CardActions>
     </Card>
   );
 }

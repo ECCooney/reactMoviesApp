@@ -18,7 +18,7 @@ const styles = {
   },
 };
 
-function TvShowListPageTemplate({ tvShows, nametitle, action }) { 
+function TvShowListPageTemplate({ tvShows, name, action }) { 
 
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
