@@ -5,7 +5,6 @@ import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
 import FavouriteMoviesPage from "./pages/favouriteMoviesPage";
 import MovieReviewPage from "./pages/movieReviewPage";
-import MovieCreditsPage from "./pages/movieCreditsPage";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import SiteHeader from './components/siteHeader'
 import { QueryClientProvider, QueryClient } from "react-query";
@@ -14,6 +13,7 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import TvShowsPage from "./pages/tvShowsPage";
 import TvShowsDetailsPage from "./pages/tvShowDetailsPage";
+import ActorPage from "./pages/actorDetailsPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,10 +38,10 @@ const App = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="*" element={<Navigate to="/" />} />
               <Route path="/reviews/:id" element={<MovieReviewPage/>} />
-              <Route path="/credits/:id" element={<MovieCreditsPage/>} />
               <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
               <Route path="/tvshows" element={<TvShowsPage/>} />
               <Route path="/tvshows/:id" element={<TvShowsDetailsPage/>} />
+              <Route path="/actors/:id" element={<ActorPage />} />
             </Routes>
         </MoviesContextProvider>
       </BrowserRouter>

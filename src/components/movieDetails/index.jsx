@@ -10,7 +10,8 @@ import Fab from "@mui/material/Fab";
 import Button from "@mui/material/Button"
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from '../movieReviews';
-import MovieCredits from '../movieCredits'
+import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
+import { Link } from "react-router-dom";
 
 const styles = {
   chipSet: {
@@ -33,6 +34,7 @@ const styles = {
 };
 
 const MovieDetails = ( {movie}) => {
+
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -44,6 +46,7 @@ const MovieDetails = ( {movie}) => {
       <Typography variant="h6" component="p">
         {movie.overview}
       </Typography>
+
 
       <Paper component="ul" sx={styles.chipSet}>
         <li>
@@ -80,6 +83,14 @@ const MovieDetails = ( {movie}) => {
           label={`${movie.vote_average} (${movie.vote_count}`}
         />
         <Chip label={`Released: ${movie.release_date}`} />
+        <Link to={`/movies/${movie.id}`}>
+              <Chip
+                icon={<RecordVoiceOverIcon />}
+                label="CAST"
+                color="primary"
+                clickable={true}
+              />
+            </Link>
       </Paper>
 
       <Fab   
