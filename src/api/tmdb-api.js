@@ -71,18 +71,23 @@ export const getMovieImages = ({ queryKey }) => {
     });
 };
 
-export const getMovieCredits = ({ queryKey }) => {
-  const [, idPart] = queryKey;
+export const getMovieCredits = (args) => {
+  // console.log(args)
+  const [, idPart] = args.queryKey;
   const { id } = idPart;
   return fetch(
     `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${
       import.meta.env.VITE_TMDB_KEY
     }`
   )
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json.results);
-      return json.results;
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
     });
 };
 

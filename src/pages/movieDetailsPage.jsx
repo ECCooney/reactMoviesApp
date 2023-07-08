@@ -22,7 +22,6 @@ const MovieDetailsPage = () => {
     getMovieCredits
   );
 
-  console.log = {credits};
 
   if (movieIsLoading || creditsIsLoading) {
     return <Spinner />;

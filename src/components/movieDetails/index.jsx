@@ -7,11 +7,12 @@ import StarRate from "@mui/icons-material/StarRate";
 import Typography from "@mui/material/Typography";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
-import Button from "@mui/material/Button"
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from '../movieReviews';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import { Link } from "react-router-dom";
+import ActorList from '../actorList';
+import Grid from "@mui/material/Grid";
 
 const styles = {
   chipSet: {
@@ -83,15 +84,15 @@ const MovieDetails = ( {movie}) => {
           label={`${movie.vote_average} (${movie.vote_count}`}
         />
         <Chip label={`Released: ${movie.release_date}`} />
-        <Link to={`/movies/${movie.id}`}>
-              <Chip
-                icon={<RecordVoiceOverIcon />}
-                label="CAST"
-                color="primary"
-                clickable={true}
-              />
-            </Link>
       </Paper>
+
+      <Typography variant="h3" component="h3" color="primary">
+        Movie Cast
+      </Typography>
+
+      <Grid container >
+        <ActorList />
+      </Grid>
 
       <Fab   
         color="secondary"

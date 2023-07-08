@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import Chip from "@mui/material/Chip";
-import Paper from "@mui/material/Paper";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import MonetizationIcon from "@mui/icons-material/MonetizationOn";
-import StarRate from "@mui/icons-material/StarRate";
 import Typography from "@mui/material/Typography";
-import NavigationIcon from "@mui/icons-material/Navigation";
-import Fab from "@mui/material/Fab";
-import Button from "@mui/material/Button"
-import Drawer from "@mui/material/Drawer";
 
 const styles = {
   chipSet: {
@@ -33,14 +24,17 @@ const styles = {
 
 
 const ActorDetails = ({actor}) => {
-    return (
-        <>
-          <Paper>
-            <Typography className={styles.root}>
-              {actor.biography ? `${actor.biography}` : "Sorry, No details"}
-            </Typography>
-          </Paper>
-        </>
-      );
-    };
+  return (
+    <>
+      <Typography variant="h5" component="h3">
+        Biography
+      </Typography>
+
+      <Typography variant="h6" component="p">
+        {actor.biography}
+      </Typography>
+      
+    </>
+  );
+};
     export default ActorDetails;

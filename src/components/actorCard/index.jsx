@@ -4,11 +4,11 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CardHeader from "@mui/material/CardHeader";
-import Chip from "@mui/material/Chip";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import img from '../../images/film-poster-placeholder.png'
+import { Link } from "react-router-dom";
 
 const styles = {
   card: {
@@ -20,6 +20,7 @@ const styles = {
     justifyContent: "center",
   },
   media: { height: 300 },
+  
   chips: {
     display: "flex",
     justifyContent: "center",
@@ -33,37 +34,33 @@ const styles = {
   },
 };
 
-export default function ActorCard({ actor }) {
-  const navigate = useNavigate();
-  const handleActor = () => {
-    navigate(`/actors/${actor.id}`);
-  };
-
+export default function ActorCard({actor}) {
   return (
-    <Card className={styles.card} elevation={24}>
-      <CardActions className={styles.header}>
-        <Typography>
-          <Box sx={{ fontSize: "0.8125rem", color: "white", margin: "4px" }}>
-            {actor.character}
-          </Box>
-        </Typography>
-      </CardActions>
+    <Card sx={styles.card}>
       <CardMedia
-        className={styles.media}
+        sx={styles.media}
         image={
           actor.profile_path
-            ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}`
-            : `${process.env.PUBLIC_URL}/assets/actor.jpg`
+              ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}`
+            : img
         }
       />
-      <CardActions className={styles.chips}>
-        <Chip
-          className={styles.chip}
-          onClick={handleActor}
-          onDelete={handleActor}
-          deleteIcon={<DeleteIcon />}
-          label={actor.name}
-        />
+      <CardContent>
+        <Grid container>
+          <Grid item xs={60}>
+            <Typography variant="h5" component="p">{actor.name}{" "} Plays </Typography>
+          </Grid>
+          <Grid item xs={6}>
+          <Typography variant="h5" component="p">{actor.character}{" "}</Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
+      <CardActions disableSpacing>
+      <Link to={`/actor/${actor.id}`}>
+      <Button variant="outlined" size="medium" color="primary">
+          Actor Bio ...
+        </Button>
+      </Link>
       </CardActions>
     </Card>
   );
