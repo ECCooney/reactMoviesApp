@@ -1,5 +1,4 @@
 import React from "react";
-import ActorHeader from "../headerActor";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -36,9 +35,6 @@ const styles = {
   const images = data.profiles;
 
   return (
-    <>
-      <ActorHeader actor={actor} />
-
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={3}>
           <div sx={styles.gridListRoot}>
@@ -63,7 +59,6 @@ const styles = {
           {children}
         </Grid>
       </Grid>
-    </>
   );
 };
 

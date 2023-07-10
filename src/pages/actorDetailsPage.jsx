@@ -8,26 +8,17 @@ import Spinner from "../components/spinner";
 
 const ActorDetailsPage = () => {
   const { id } = useParams();
-  const { data: actor, actorError, actorIsLoading, actorIsError } = useQuery(
+  const { data: actor, error, isLoading, isError } = useQuery(
     ["actor", { id: id }],
     getActor
   );
 
-  const { data: credits, creditsError, creditsIsLoading, creditsIsError } = useQuery(
-    ["credits", { id: id }],
-    getActorCredits
-  );
-
-  if (actorIsLoading || creditsIsLoading) {
+  if (isLoading) {
     return <Spinner />;
   }
 
-  if (actorIsError) {
-    return <h1>{actorError.message}</h1>;
-  }
-
-  if (creditsIsError) {
-    return <h1>{creditsError.message}</h1>;
+  if (isError) {
+    return <h1>{error.message}</h1>;
   }
 
   return (

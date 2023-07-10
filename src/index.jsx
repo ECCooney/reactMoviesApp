@@ -43,7 +43,7 @@ const App = () => {
               <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
               <Route path="/tvshows" element={<TvShowsPage/>} />
               <Route path="/tvshows/:id" element={<TvShowsDetailsPage/>} />
-              <Route path="/actors/:id" element={<ActorDetailsPage />} />
+              <Route path="/actor/:id" element={<ActorDetailsPage />} />
             </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
