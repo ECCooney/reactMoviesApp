@@ -15,6 +15,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 import TvShowsPage from "./pages/tvShowsPage";
 import TvShowsDetailsPage from "./pages/tvShowDetailsPage";
 import ActorDetailsPage from "./pages/actorDetailsPage";
+import FantasyMoviePage from "./pages/fantasyMoviePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,6 +42,7 @@ const App = () => {
               <Route path="*" element={<Navigate to="/" />} />
               <Route path="/reviews/:id" element={<MovieReviewPage/>} />
               <Route path="/reviews/form" element={<AddMovieReviewPage/>} />
+              <Route path="/fantasymovie" element={<FantasyMoviePage/>} />
               <Route path="/tvshows" element={<TvShowsPage/>} />
               <Route path="/tvshows/:id" element={<TvShowsDetailsPage/>} />
               <Route path="/actor/:id" element={<ActorDetailsPage />} />
