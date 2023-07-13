@@ -18,7 +18,7 @@ const FantasyMovieForm = ({ movie }) => {
       overview: "",
       agree: false,
       genre: "",
-      releaseDate: "",
+      release: "",
       runtime: "",
       productionCompany:"",
 

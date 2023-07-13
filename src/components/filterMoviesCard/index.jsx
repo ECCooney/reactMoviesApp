@@ -57,6 +57,10 @@ export default function FilterMoviesCard(props) {
     handleUserInput(e, "title", e.target.value);
   };
 
+  const handleYearChange = (e, props) => {
+    handleUserInput(e, "release_date", e.target.value);
+  };
+
   const handleGenreChange = (e) => {
     handleUserInput(e, "genre", e.target.value);
   };
@@ -76,11 +80,20 @@ export default function FilterMoviesCard(props) {
         <TextField
           sx={styles.formControl}
           id="filled-search"
-          label="Search field"
+          label="Search by Title"
           type="search"
           value={props.titleFilter}
           variant="filled"
           onChange={handleTextChange}
+        />
+        <TextField
+          sx={styles.formControl}
+          id="filled-search"
+          label="Search by Release Year"
+          type="search"
+          value={props.releaseDateFilter}
+          variant="filled"
+          onChange={handleYearChange}
         />
         <FormControl sx={styles.formControl}>
           <InputLabel id="genre-label">Genre</InputLabel>

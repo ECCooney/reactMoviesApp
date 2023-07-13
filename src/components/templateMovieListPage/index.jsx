@@ -18,13 +18,14 @@ const styles = {
   },
 };
 
-function MovieListPageTemplate({ movies, title, action }) { 
+function MovieListPageTemplate({ movies, title, release_date, action }) { 
    //the above is shorthand for function MovieListPageTemplate( props ) {
    // const movies = props.movies
    // const title = props.title
   //  const action = props.action (where action refers to the add favourite render prop)
 
   const [titleFilter, setTitleFilter] = useState("");
+  const [releaseDateFilter, setReleaseDateFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -36,10 +37,14 @@ function MovieListPageTemplate({ movies, title, action }) {
     })
     .filter((m) => {
       return genreId > 0 ? m.genre_ids.includes(genreId) : true;
+    })
+    .filter((m) => {
+      return m.release_date.search(releaseDateFilter) !== -1;
     });
 
   const handleChange = (type, value) => {
     if (type === "title") setTitleFilter(value);
+    else if (type === "release_date") setReleaseDateFilter(value);
     else setGenreFilter(value);
   };
 
@@ -69,6 +74,7 @@ function MovieListPageTemplate({ movies, title, action }) {
         <FilterCard
           onUserInput={handleChange}
           titleFilter={titleFilter}
+          releaseDateFilter={releaseDateFilter}
           genreFilter={genreFilter}
         />
       </Drawer>
