@@ -32,7 +32,7 @@ const FantasyMovieForm = ({ movie }) => {
     } = useForm(defaultValues);
     const navigate = useNavigate();
     const context = useContext(MoviesContext);
-    const [genre, setGenre] = useState(3);
+    const [genre, setGenre] = useState("Action");
     const [open, setOpen] = useState(false);
   
   

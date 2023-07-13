@@ -9,7 +9,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SortIcon from '@mui/icons-material/Sort';
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { getGenres } from "../../api/tmdb-api";
+import { getGenres, getCertifications } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
 
@@ -27,31 +27,42 @@ const styles = {
 };
 
 export default function FilterMoviesCard(props) {
-  const { data, error, isLoading, isError } = useQuery("genres", getGenres);
+  const { data: genreData, genreError, genreIsLoading, genreIsError } = useQuery("genres", getGenres);
+  const { data: certData, error, isLoading, isError } = useQuery("certifications", getCertifications);
 
-  if (isLoading) {
+  if (isLoading || genreIsLoading) {
     return <Spinner />;
   }
 
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const genres = data.genres;
+
+  if (genreIsError) {
+    return <h1>{genreError.message}</h1>;
+  }
+  const genres = genreData.genres;
   if (genres[0].name !== "All") {
     genres.unshift({ id: "0", name: "All" });
   }
 
-  const handleUserImput = (e, type, value) => {
+  const certifications = certData ? certData.certifications.US : [];
+
+  const handleUserInput = (e, type, value) => {
     e.preventDefault();
     props.onUserInput(type, value); // NEW
   };
 
   const handleTextChange = (e, props) => {
-    handleUserImput(e, "title", e.target.value);
+    handleUserInput(e, "title", e.target.value);
   };
 
   const handleGenreChange = (e) => {
-    handleUserImput(e, "genre", e.target.value);
+    handleUserInput(e, "genre", e.target.value);
+  };
+
+  const handleCertificationChange = (e) => {
+    handleUserInput(e, "certification", e.target.value);
   };
 
   return (
@@ -83,6 +94,23 @@ export default function FilterMoviesCard(props) {
               return (
                 <MenuItem key={genre.id} value={genre.id}>
                   {genre.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+        <FormControl sx={styles.formControl}>
+          <InputLabel id="certification-label">Certification</InputLabel>
+          <Select
+            labelId="certification-label"
+            id="certification-select"
+            value={props.certificationFilter}
+            onChange={handleCertificationChange}
+          >
+            {certifications.map((certification) => {
+              return (
+                <MenuItem key={certification.order} value={certification.order}>
+                  {certification.certification}
                 </MenuItem>
               );
             })}
