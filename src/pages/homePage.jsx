@@ -4,9 +4,17 @@ import { getMovies } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
+import Pagination from '@mui/material/Pagination';
 
 const HomePage = (props) => {
-  const { data, error, isLoading, isError } = useQuery("discover", getMovies);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+    console.log(value)
+  };
+
+  const {  data, error, isLoading, isError }  = useQuery(['discover', currentPage], () => getMovies(currentPage), { keepPreviousData: true })
 
   if (isLoading) {
     return <Spinner />;
@@ -18,6 +26,7 @@ const HomePage = (props) => {
   const movies = data ? data.results : [];
 
   return (
+    <>
     <PageTemplate
       title="Discover Movies"
       movies={movies}
@@ -25,6 +34,18 @@ const HomePage = (props) => {
         return <AddToFavouritesIcon movie={movie} />
       }}
     />
+     <Pagination
+        count='100'
+        variant='outlined'
+        color='primary'
+        shape="rounded"
+        showFirstButton 
+        showLastButton
+        className='pagination'
+        page={currentPage}
+        onChange={handleChange}
+      />
+    </>
   );
 };
 export default HomePage;
