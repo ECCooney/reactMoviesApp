@@ -1,14 +1,19 @@
 # Full Stack Development 2 - Assignment.
 
-**Name:** [your full name]
+**Name:** Ellen Cooney
 
 ## Features.
 
 [A bullet-point list of the features developed for the React SPA app (only new/modified ones for the Movies app),]
 
-- Feature X.
-- Feature Y.
-- etc.
+Complete
+- Top Rated Movies List.
+- Tv Shows List.
+- Filter by Release Year
+-Pagination on Movies, Tv Shows, and Upcoming Movies
+
+Incomplete/Partially implemented
+- Filter by Certification
 
 ## Feature Design.
 
