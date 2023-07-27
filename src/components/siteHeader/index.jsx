@@ -11,104 +11,166 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useAuth } from "../../contexts/authContext";
+import { supabase } from "../../supabase/client";
 
 const styles = {
-  title: {
-    flexGrow: 1,
-  },
+	title: {
+		flexGrow: 1,
+	},
 };
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = () => {
-  const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+	const { user, loading } = useAuth();
+	const [loggedIn, setLoggedIn] = React.useState(false);
+	const navigate = useNavigate();
+	const [anchorEl, setAnchorEl] = useState(null);
+	const open = Boolean(anchorEl);
+	const theme = useTheme();
+	const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
-  const menuOptions = [
-    { label: "Home", path: "/" },
-    { label: "Favorites", path: "/movies/favourites" },
-    { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Top Rated", path: "/movies/toprated" },
-    { label: "TV Shows", path: "/tvshows" },
-    { label: "My Fantasy Movie", path: "/fantasymovie" },
-  ];
+	React.useEffect(() => {
+		if (!loading) {
+			setLoggedIn(user !== null);
+		}
+	});
 
-  const handleMenuSelect = (pageURL) => {
-    navigate(pageURL);
-  };
+	React.useEffect(() => {
+		const { data: authListener } = supabase.auth.onAuthStateChange(
+			(event, _session) => {
+				setLoggedIn(_session !== null);
+			}
+		);
+		return () => {
+			authListener.subscription.unsubscribe();
+		};
+	});
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+	const menuOptions = [
+		{ label: "Home", path: "/" },
+		{ label: "Favorites", path: "/movies/favourites" },
+		{ label: "Upcoming", path: "/movies/upcoming" },
+		{ label: "Top Rated", path: "/movies/toprated" },
+		{ label: "TV Shows", path: "/tvshows" },
+		{ label: "My Fantasy Movie", path: "/fantasymovie" },
+	];
 
-  return (
-    <>
-      <AppBar position="fixed" elevation={0} color="primary">
-        <Toolbar>
-          <Typography variant="h4" sx={styles.title}>
-            TMDB Client
-          </Typography>
-          <Typography variant="h6" sx={styles.title}>
-            All you ever wanted to know about Movies!
-          </Typography>
-          {isMobile ? (
-            <>
-              <IconButton
-                aria-label="menu"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-                size="large"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={open}
-                onClose={() => setAnchorEl(null)}
-              >
-                {menuOptions.map((opt) => (
-                  <MenuItem
-                    key={opt.label}
-                    onClick={() => handleMenuSelect(opt.path)}
-                  >
-                    {opt.label}
-                  </MenuItem>
-                ))}
-              </Menu>
-            </>
-          ) : (
-            <>
-              {menuOptions.map((opt) => (
-                <Button
-                  key={opt.label}
-                  color="inherit"
-                  onClick={() => handleMenuSelect(opt.path)}
-                >
-                  {opt.label}
-                </Button>
-              ))}
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-      <Offset />
-    </>
-  );
+	const handleMenuSelect = (pageURL) => {
+		if (pageURL === "logout") {
+			handleLogout();
+		} else {
+			navigate(pageURL);
+		}
+	};
+
+	const handleMenu = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const { auth, signOut } = useAuth();
+
+	const handleLogout = async (e) => {
+		try {
+			setAnchorEl(null);
+			await signOut();
+		} catch (error) {
+			console.log(error);
+		}
+		navigate("/login");
+	};
+
+	return (
+		<>
+			<AppBar position="fixed" elevation={0} color="primary">
+				<Toolbar>
+					<Typography variant="h4" sx={styles.title}>
+						TMDB Client
+					</Typography>
+					{loggedIn ? (
+						isMobile ? (
+							<>
+								<IconButton
+									aria-label="menu"
+									aria-controls="menu-appbar"
+									aria-haspopup="true"
+									onClick={handleMenu}
+									color="inherit"
+									size="large"
+								>
+									<MenuIcon />
+								</IconButton>
+								<Menu
+									id="menu-appbar"
+									anchorEl={anchorEl}
+									anchorOrigin={{
+										vertical: "top",
+										horizontal: "right",
+									}}
+									keepMounted
+									transformOrigin={{
+										vertical: "top",
+										horizontal: "right",
+									}}
+									open={open}
+									onClose={() => setAnchorEl(null)}
+								>
+									{menuOptions.map((opt) => (
+										<MenuItem
+											key={opt.label}
+											onClick={() => handleMenuSelect(opt.path)}
+										>
+											{opt.label}
+										</MenuItem>
+									))}
+								</Menu>
+							</>
+						) : (
+							<>
+								{wideMenuDropdownOptions.map((opt, index) => (
+									<>
+										<div style={{ pointerEvents: "none" }}>
+											<Button key={index} color="inherit">
+												{opt.label}
+											</Button>
+										</div>
+										<Dropdown
+											key={opt.id}
+											options={opt.items}
+											onChange={_onSelect}
+											value={wideMenuDropdownOptions[index].label}
+											placeholder={wideMenuDropdownOptions[index].label}
+										/>
+									</>
+								))}
+								{wideMenuOptions.map((opt) => (
+									<Button
+										key={opt.label}
+										color="inherit"
+										onClick={() => handleMenuSelect(opt.path)}
+									>
+										{opt.label}
+									</Button>
+								))}
+							</>
+						)
+					) : (
+						<>
+							<Button
+								key="login"
+								color="inherit"
+								onClick={() => handleMenuSelect("/login")}
+							>
+								Sign in
+							</Button>
+						</>
+					)}
+				</Toolbar>
+			</AppBar>
+			<Offset />
+		</>
+	);
 };
 
 export default SiteHeader;

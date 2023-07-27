@@ -10,10 +10,13 @@ Complete
 - Top Rated Movies List.
 - Tv Shows List.
 - Filter by Release Year
--Pagination on Movies, Tv Shows, and Upcoming Movies
+- Pagination on Movies, Tv Shows, and Upcoming Movies
+- Cast list added to Movie Details in card form
+- Actor Details hyperlinked from cast card
 
 Incomplete/Partially implemented
 - Filter by Certification
+- Fantasy movie form
 
 ## Feature Design.
 
