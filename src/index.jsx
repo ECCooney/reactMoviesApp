@@ -41,20 +41,87 @@ const App = () => {
 						<Routes>
 							<Route path="/login" element={<LoginPage />} />
 							<Route path="/signup" element={<SignupPage />} />
-							<Route path="/movies/:id" element={<MoviePage />} />
-							<Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-							<Route path="/movies/toprated" element={<TopRatedMoviesPage />} />
+							<Route
+								path="/movies/:id"
+								element={
+									<ProtectedRoute>
+										<MoviePage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/movies/upcoming"
+								element={
+									<ProtectedRoute>
+										<UpcomingMoviesPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/movies/toprated"
+								element={
+									<ProtectedRoute>
+										<TopRatedMoviesPage />
+									</ProtectedRoute>
+								}
+							/>
 							<Route path="/" element={<HomePage />} />
 							<Route path="*" element={<Navigate to="/" />} />
-							<Route path="/reviews/:id" element={<MovieReviewPage />} />
-							<Route path="/reviews/form" element={<AddMovieReviewPage />} />
-							<Route path="/fantasymovie" element={<FantasyMoviePage />} />
-							<Route path="/tvshows" element={<TvShowsPage />} />
-							<Route path="/tvshows/:id" element={<TvShowsDetailsPage />} />
-							<Route path="/actor/:id" element={<ActorDetailsPage />} />
+							<Route
+								path="/reviews/:id"
+								element={
+									<ProtectedRoute>
+										<MovieReviewPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/reviews/form"
+								element={
+									<ProtectedRoute>
+										<AddMovieReviewPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/fantasymovie"
+								element={
+									<ProtectedRoute>
+										<FantasyMoviePage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/tvshows"
+								element={
+									<ProtectedRoute>
+										<TvShowsPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/tvshows/:id"
+								element={
+									<ProtectedRoute>
+										<TvShowsDetailsPage />
+									</ProtectedRoute>
+								}
+							/>
+							<Route
+								path="/actor/:id"
+								element={
+									<ProtectedRoute>
+										<ActorDetailsPage />
+									</ProtectedRoute>
+								}
+							/>
 							<Route
 								path="/movies/favourites"
-								element={<FavouriteMoviesPage />}
+								element={
+									<ProtectedRoute>
+										<FavouriteMoviesPage />
+									</ProtectedRoute>
+								}
 							/>
 						</Routes>
 					</MoviesContextProvider>
