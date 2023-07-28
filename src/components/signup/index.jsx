@@ -5,38 +5,48 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/authContext";
+import { Link } from "react-router-dom";
+import { supabase } from "../../supabase/client";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-const LoginForm = () => {
+const SignupForm = () => {
 	let password = "";
+	let passwordConfirm = "";
 	let email = "";
 	const [errorMsg, setErrorMsg] = useState("");
+	const [msg, setMsg] = useState("");
 	const [loading, setLoading] = useState(false);
-	const navigate = useNavigate();
-	const { login } = useAuth();
+
+	const signup = (email, password) =>
+		supabase.auth.signUp({
+			email,
+			password,
+		});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (password === "" || email === "" || passwordConfirm === "") {
+			setErrorMsg("Please complete all fields");
+			return;
+		}
+		if (password !== passwordConfirm) {
+			setErrorMsg("Password error");
+			return;
+		}
 		try {
 			setErrorMsg("");
 			setLoading(true);
-			if (email === "" || password === "") {
-				setErrorMsg("Please provide all the fields");
-				return;
+			const { data, error } = await signup(email, password);
+			if (!error && data) {
+				setMsg("Signed Up. Go to Login page to sign in");
 			}
-			const {
-				data: { user, session },
-				error,
-			} = await login(email, password);
-			if (error) setErrorMsg(error.message);
-			if (user && session) navigate("/");
 		} catch (error) {
-			setErrorMsg("Incorrect credentials");
+			setErrorMsg("Error occurred");
 		}
 		setLoading(false);
 	};
@@ -48,6 +58,11 @@ const LoginForm = () => {
 	const setPassword = (p) => {
 		password = p;
 	};
+
+	const setPasswordConfirm = (pc) => {
+		passwordConfirm = pc;
+	};
+
 	return (
 		<>
 			<Container component="main" maxWidth="xs">
@@ -59,8 +74,11 @@ const LoginForm = () => {
 						alignItems: "center",
 					}}
 				>
+					<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+						<LockOutlinedIcon />
+					</Avatar>
 					<Typography component="h1" variant="h5">
-						Log In
+						Sign up
 					</Typography>
 				</Box>
 				<Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -86,9 +104,28 @@ const LoginForm = () => {
 							</FormControl>
 						</FormGroup>
 					</Grid>
+					<Grid item xs={12}>
+						<FormGroup
+							id="passwordConfirm"
+							style={{ marginTop: "15px", marginBottom: "10px" }}
+						>
+							<FormControl>
+								<InputLabel>Confirm Password</InputLabel>
+								<Input
+									id="passwordConfirm"
+									onInput={(e) => setPasswordConfirm(e.target.value)}
+								/>
+							</FormControl>
+						</FormGroup>
+					</Grid>
 					{errorMsg && (
 						<Alert severity="warning" onClose={() => setErrorMsg("")}>
 							{errorMsg}
+						</Alert>
+					)}
+					{msg && (
+						<Alert severity="success" onClose={() => setMsg("")}>
+							{msg}
 						</Alert>
 					)}
 					<Button
@@ -97,13 +134,13 @@ const LoginForm = () => {
 						variant="contained"
 						sx={{ mt: 3, mb: 2 }}
 					>
-						Log In
+						Sign up
 					</Button>
 					<Grid container justifyContent="flex-end">
 						<Grid item>
-							New User?
+							Already Signed Up?
 							<Button>
-								<Link to={"/signup"}>Sign up</Link>
+								<Link to={"/login"}>Sign in</Link>
 							</Button>
 						</Grid>
 					</Grid>
@@ -113,4 +150,4 @@ const LoginForm = () => {
 	);
 };
 
-export default LoginForm;
+export default SignupForm;

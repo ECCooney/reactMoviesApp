@@ -55,6 +55,7 @@ const SiteHeader = () => {
 		{ label: "Top Rated", path: "/movies/toprated" },
 		{ label: "TV Shows", path: "/tvshows" },
 		{ label: "My Fantasy Movie", path: "/fantasymovie" },
+		{ label: "Sign out", path: "logout" },
 	];
 
 	const handleMenuSelect = (pageURL) => {
@@ -128,23 +129,7 @@ const SiteHeader = () => {
 							</>
 						) : (
 							<>
-								{wideMenuDropdownOptions.map((opt, index) => (
-									<>
-										<div style={{ pointerEvents: "none" }}>
-											<Button key={index} color="inherit">
-												{opt.label}
-											</Button>
-										</div>
-										<Dropdown
-											key={opt.id}
-											options={opt.items}
-											onChange={_onSelect}
-											value={wideMenuDropdownOptions[index].label}
-											placeholder={wideMenuDropdownOptions[index].label}
-										/>
-									</>
-								))}
-								{wideMenuOptions.map((opt) => (
+								{menuOptions.map((opt) => (
 									<Button
 										key={opt.label}
 										color="inherit"
@@ -162,7 +147,7 @@ const SiteHeader = () => {
 								color="inherit"
 								onClick={() => handleMenuSelect("/login")}
 							>
-								Sign in
+								Log In
 							</Button>
 						</>
 					)}
