@@ -4,17 +4,21 @@
 
 ## Features.
 
-[A bullet-point list of the features developed for the React SPA app (only new/modified ones for the Movies app),]
-
 Complete
+
 - Top Rated Movies List.
 - Tv Shows List.
 - Filter by Release Year
 - Pagination on Movies, Tv Shows, and Upcoming Movies
 - Cast list added to Movie Details in card form
 - Actor Details hyperlinked from cast card
+- Favourite TV shows - adding and deleting, and page to display
+- Sign up and login functionality supported by Supabase
+- Two site headers based on whether user is logged in
+- Protected routes for logged in users
 
 Incomplete/Partially implemented
+
 - Filter by Certification
 - Fantasy movie form
 
