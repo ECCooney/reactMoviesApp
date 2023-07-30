@@ -4,6 +4,7 @@ import { getTvShows } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import Pagination from "@mui/material/Pagination";
+import AddToTvFavouritesIcon from "../components/cardIcons/addtoTvFavourites";
 
 const TvShowsPage = (props) => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -32,7 +33,13 @@ const TvShowsPage = (props) => {
 
 	return (
 		<>
-			<PageTemplate title="Discover TV Shows" tvShows={tvShows} />
+			<PageTemplate
+				title="Discover TV Shows"
+				tvShows={tvShows}
+				action={(tvShow) => {
+					return <AddToTvFavouritesIcon tvShow={tvShow} />;
+				}}
+			/>
 			<Pagination
 				count="100"
 				variant="outlined"
