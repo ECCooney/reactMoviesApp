@@ -58,6 +58,12 @@ const SiteHeader = () => {
 		{ label: "Sign out", path: "logout" },
 	];
 
+	const publicMenuOptions = [
+		{ label: "Home", path: "/" },
+		{ label: "TV Shows", path: "/tvshows" },
+		{ label: "Login", path: "/login" },
+	];
+
 	const handleMenuSelect = (pageURL) => {
 		if (pageURL === "logout") {
 			handleLogout();
@@ -142,13 +148,15 @@ const SiteHeader = () => {
 						)
 					) : (
 						<>
-							<Button
-								key="login"
-								color="inherit"
-								onClick={() => handleMenuSelect("/login")}
-							>
-								Log In
-							</Button>
+							{publicMenuOptions.map((opt) => (
+								<Button
+									key={opt.label}
+									color="inherit"
+									onClick={() => handleMenuSelect(opt.path)}
+								>
+									{opt.label}
+								</Button>
+							))}
 						</>
 					)}
 				</Toolbar>
