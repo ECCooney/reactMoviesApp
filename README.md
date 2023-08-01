@@ -90,11 +90,9 @@
 
 ## Storybook.
 
-[Include a screenshot(s) from the Storybook UI and highlight the stories for new components developed.]
+> Storybook Overview with new stories highlighted in red
 
-e.g.
-
-![][public\Storybook.PNG]
+![Storybook Overview][.\images\Storybook.PNG]
 
 ## Authentication.
 
