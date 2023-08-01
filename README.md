@@ -4,47 +4,89 @@
 
 ## Features.
 
-Complete
+**Complete**
 
 - Top Rated Movies List.
 - Tv Shows List.
 - Filter by Release Year
-- Pagination on Movies, Tv Shows, and Upcoming Movies
 - Cast list added to Movie Details in card form
 - Actor Details hyperlinked from cast card
+- Pagination on Movies, Tv Shows, and Upcoming Movies
 - Favourite TV shows - adding and deleting, and page to display
 - Sign up and login functionality supported by Supabase
 - Two site headers based on whether user is logged in
 - Protected routes for logged in users
 
-Incomplete/Partially implemented
+**Incomplete/Partially implemented**
 
 - Filter by Certification
 - Fantasy movie form
 
 ## Feature Design.
 
-[ For each feature listed above, show a screenshot(s) of its UI layout (use appropriate magnification for accessibility). Include a caption with each image.]
-
-e.g.
-
-#### Upcoming Movies.
+#### Tv Shows List.
 
 > Lists movies from the Upcoming movies endpoint of TMDB.
 
 ![][image1]
 
-#### Movies Reviews.
+#### Top Rated Movies.
 
 > Lists all the reviews for a particular movie (shows text extract only).
 
 ![][image2]
 
+#### Filter By Release Year.
+
 > Click the 'Full Review' link of a review extract to see the review's full text.
 
 ![][image3]
 
-.... other features .......
+#### Cast List on Movie Page.
+
+> Cast cards for each cast member for the associated movie.
+
+#### Actor Details page.
+
+> Access the cast member details through a link in their cast card.
+
+![][image3]
+
+#### Pagination for Tv Show and Movie Lists.
+
+> 100 pages of tv shows and movies available.
+
+![][image3]
+
+#### Favourite TV Show function and page.
+
+> Ability to add a favourite tv show.
+
+![][image3]
+
+> A view of all favourite tv shows.
+
+![][image3]
+
+#### Sign up and login functionality.
+
+> Page to register for the site
+
+![][image3]
+
+> Page to login with hyperlink to signup page for unregistered users
+
+![][image3]
+
+#### Different site header with protected routes for logged in user.
+
+> Public site header
+
+![][image3]
+
+> Logged in user site header
+
+![][image3]
 
 ## Storybook.
 
@@ -52,42 +94,35 @@ e.g.
 
 e.g.
 
-![][image5]
+![][public\Storybook.PNG]
 
-## Authentication. (if relevant)
+## Authentication.
+
+> Authentication implemented using supabase to validate users, and store registered user information
+
+#### Public routes
+
+- / (homepage with list of movies from tmdb endpoint)
+- /tvshows (homepage with list of tv shows from tmdb endpoint)
+- /login (allows users to login)
+- /signup (allows unregistered users to signup)
 
 #### Protected routes
 
-[List all the routes in your app and highlight those that are protected/private (require authentication).]
-
-e.g.
-
-- /movies - List of 20 movies from the Discover endpoint,
-- /movies/{movie_id} - Detailed information on a specific movie.
-- /reviews/{review_id} (Protected) - The full text of a movie review.
-- /movie/{movie_id}/similar - A list of similar movies.
-- /person/{person_id} (Protected) - A specific actor's bio.
-- etc
-- etc
-
-#### Protected functionality. (if relevant)
-
-[ Briefly state any app functionality that requires authentication, e.g. only authenticated users can tag a movie as a 'favourite'.]
+- /movies/:id (provides details for any movie)
+- /movies/upcoming (lists upcoming movies)
+- /movies/toprated (lists top rated movies)
+- /reviews/:id (provides details and full text of a review)
+- /reviews/form (allows users to submit a review)
+- /fantasymovie (allows users to submit their fantasy movie) NB: function is broken
+- /tvshows/:id (provides details for any tv show)
+- /actor/:id (provides details for an actor from a movie cast)
+- /movies/favourites (shows a logged in user's favourite movies)
+- /tvShows/tvfavourites (shows a logged in user's favourite tv shows)
 
 #### Supabase (if relevant)
 
 [Include a screenshot(s) from your Supabase account that verifies its use for this app. ]
-
-## Deployment (if relevant).
-
-[Specify the URL of your deployed app and include a screenshot(s) from your deployment platform account (e.g. Vercal) that verifies its use for this app. Set up a registered user for your app and specify their credentials.
-
-Username: test1 ; Password: pass1
-]
-
-## Persistence (if relevant).
-
-[If you are persisting data to the Supabase backend (e.g. favourite movies, fantasy movie), include screenshots with appropriate captions to verify this aspect. ]
 
 ## Additional Information.
 
