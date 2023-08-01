@@ -21,82 +21,107 @@
 
 - Filter by Certification
 - Fantasy movie form
+- Tv Show Details
 
 ## Feature Design.
 
+**Complete**
+
 #### Tv Shows List.
 
-> Lists movies from the Upcoming movies endpoint of TMDB.
+> Lists tv shows from the TMDB endpoint.
 
-![][image1]
+![Tv Show List](src/images/tvShowsList.PNG)
 
 #### Top Rated Movies.
 
-> Lists all the reviews for a particular movie (shows text extract only).
+> Lists all the top rated movies from the top rated TMDB endpoint.
 
-![][image2]
+![Top Rated](src/images/TopRated.PNG)
 
 #### Filter By Release Year.
 
-> Click the 'Full Review' link of a review extract to see the review's full text.
+> Users can filter movies by entering a release year (entering 199 will narrow it down to all 90s movies).
 
-![][image3]
+![Filter by year](src/images/FilterByYear.PNG)
 
 #### Cast List on Movie Page.
 
 > Cast cards for each cast member for the associated movie.
 
+![Cast list](src/images/castList.PNG)
+
 #### Actor Details page.
 
 > Access the cast member details through a link in their cast card.
 
-![][image3]
+![Actor Details](src/images/ActorDetails.PNG)
 
 #### Pagination for Tv Show and Movie Lists.
 
 > 100 pages of tv shows and movies available.
 
-![][image3]
+![Movie List Pagination](src/images/moviespagination.PNG) | ![TV List Pagination](src/images/TvPagination.PNG)
 
 #### Favourite TV Show function and page.
 
 > Ability to add a favourite tv show.
 
-![][image3]
+![Add Fave TV](src/images/faveTvAdd.PNG)
 
 > A view of all favourite tv shows.
 
-![][image3]
+![Tv Faves](src/images/tvFavesList.PNG)
 
 #### Sign up and login functionality.
 
 > Page to register for the site
 
-![][image3]
+![Signup](src/images/signup.PNG)
 
 > Page to login with hyperlink to signup page for unregistered users
 
-![][image3]
+![Login](src/images/login.PNG)
 
 #### Different site header with protected routes for logged in user.
 
 > Public site header
 
-![][image3]
+![Public site header](src/images/publicHeader.PNG)
 
 > Logged in user site header
 
-![][image3]
+![Loggin in site header](src/images/loggedInHeader.PNG)
+
+**Incomplete**
+
+#### Tv Show Details page.
+
+> Page is live but seasons function is not working
+
+![Tv Show Details](src/images/TvShowDetails.PNG)
+
+#### Filter by Certification.
+
+> Not functioning - brought list of US certs into app but couldn't link to associated movie.
+
+![Alt text](src/images/certFilter.PNG)
+
+#### Add fantasy movie.
+
+> Not functioning - sometimes throws an error that needs to be forced through. Takes list of genres from TMDB endpoint, and date/calendar function is broken. Form can be filled in but info is not displayed.
+
+![Alt text](src/images/fantasyForm.PNG)
 
 ## Storybook.
 
 > Storybook Overview with new stories highlighted in red
 
-![Storybook Overview][src\images\Storybook.PNG]
+![Storybook Overview](src/images/Storybook.PNG)
 
 ## Authentication.
 
-> Authentication implemented using supabase to validate users, and store registered user information
+> Authentication implemented using supabase to validate users, and store registered user information - see Supabase section below
 
 #### Public routes
 
@@ -120,14 +145,4 @@
 
 #### Supabase (if relevant)
 
-[Include a screenshot(s) from your Supabase account that verifies its use for this app. ]
-
-## Additional Information.
-
-[ Briefly explain any other aspects of your app's design or implementation that is non-standard and worthy of mention.]
-
-[image1]: ./images/image1.png
-[image2]: ./images/image2.png
-[image3]: ./images/image3.png
-[image4]: ./images/image4.png
-[image5]: ./images/image5.png
+![Supabase Dashboard](src/images/SuperbaseDash.PNG)
