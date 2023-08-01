@@ -92,7 +92,7 @@
 
 > Storybook Overview with new stories highlighted in red
 
-![Storybook Overview][.\images\Storybook.PNG]
+![Storybook Overview][src\images\Storybook.PNG]
 
 ## Authentication.
 
